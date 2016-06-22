@@ -1,9 +1,9 @@
 import Html exposing (article, h1, div, p, text, img)
-import Html.App exposing (beginnerProgram)
+import Html.App
 import Html.Attributes exposing (src, class)
 
 main =
-  beginnerProgram { model = model, view = view, update = update }
+  Html.App.program { init = init, view = view, update = update, subscriptions = subscriptions }
 
 -- MODEL
 
@@ -18,13 +18,23 @@ model : Model
 model =
   Model "Here is the original article title" "https://placekitten.com/200/300" "fish" "Here is a more detailed description. It is usually a couple of sentences."
 
+init : (Model, Cmd Msg)
+init =
+  (model, Cmd.none)
+
 -- UPDATE
 
 type Msg = Increment | Decrement
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-  model
+  (model, Cmd.none)
+
+-- SUBSCRIPTIONS
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
 
 -- VIEW
 
